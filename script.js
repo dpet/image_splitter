@@ -19,7 +19,6 @@ img.src = "http://localhost/personalsite/pics/daniel_petersen_2.jpg";
 img.onload = function () {
 	imgWidth = this.width;
 	imgHeight = this.height;
-	widthRatio = imgWidth/width;
 	draw_image();
 }
 
@@ -35,7 +34,7 @@ function draw_image(){
 	ctx.setTransform(1, 0, 0, 1, 0, 0);		
 	ctx.clearRect(0, 0, width, height);	
 	
-	ctx.translate(offset/widthRatio, 0);
+	ctx.translate(offset, 0);
 	
 	ctx.translate(width/2, height/2);
 	ctx.rotate(rotation);		
@@ -47,7 +46,7 @@ function draw_image(){
 	ctx2.setTransform(1, 0, 0, 1, 0, 0);
 	ctx2.clearRect(0, 0, width, height);
 	
-	ctx2.translate(-offset/widthRatio, 0);
+	ctx2.translate(-offset, 0);
 	
 	ctx2.translate(width/2, height/2);
 	ctx2.rotate(-rotation);
@@ -91,8 +90,8 @@ function load_sliders(){
 
 	$(function() {
 		$("#position_slider").slider({
-			min: -100,
-			max: 100,
+			min: -300,
+			max: 300,
 			value: 0,
 			slide: function( event, ui ) {
 				val = $('#position_slider').slider("option", "value");

@@ -25,7 +25,9 @@
 	
 		<div class="menu-container">
 			<div class="label">Image URL</div><input id="image-input" class="input"></input>
-			<button onclick="load_image()" class="load-button" id="load-button">Load</button>
+			<button onclick="load_image()" class="load-button" id="load-button">Load</button><br>
+			
+			<div class="label">Upload Image</div><input type="file" id="image-upload">
 		</div><br>
 		
 		<!-- can't have line breaks at the end or it puts a space between the canvasses -->

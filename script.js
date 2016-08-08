@@ -1,7 +1,5 @@
 
 
-load_sliders();
-
 var width = 300;
 var height = 300;
 var offset = 0;
@@ -15,12 +13,9 @@ var c2 = document.getElementById("myCanvas2");
 var ctx2 = c2.getContext("2d");
 
 var img = new Image();
-img.src = "http://localhost/personalsite/pics/daniel_petersen_2.jpg";
-img.onload = function () {
-	imgWidth = this.width;
-	imgHeight = this.height;
-	draw_image();
-}
+set_image("http://localhost/personalsite/pics/daniel_petersen_2.jpg");
+
+load_sliders();
 
 $('#image-input').keyup(function(e){
     if(e.keyCode == 13)
@@ -29,7 +24,55 @@ $('#image-input').keyup(function(e){
     }
 });
 
+$('#image-upload').change(function(){
+	var selectedFile = $('#image-upload')[0].files[0];
+	
+	var reader = new FileReader();  
+	
+	reader.onload = function(event){
+		set_image(event.target.result);
+		$('#image-upload').val('');
+	};
+	
+	
+	reader.readAsDataURL(selectedFile);	
+});
+
 function draw_image(){	
+
+	xCenter = (width-width*size)/2 + imgScaledWidth*size/2;
+
+	ctx.setTransform(1, 0, 0, 1, 0, 0);		
+	ctx.clearRect(0, 0, width, height);	
+	
+	ctx.translate(offset, 0);
+	
+	
+	
+	ctx.translate(xCenter, height/2);
+	//ctx.fillRect(0, 0, 4, 4);
+	ctx.rotate(rotation);			
+	ctx.translate(-xCenter, -height/2);
+	
+	//ctx.globalAlpha = 0.5
+	ctx.drawImage(img, (width-width*size)/2, (height-height*size)/2, imgScaledWidth*size, height*size);
+	
+	// ctx2
+	ctx2.setTransform(1, 0, 0, 1, 0, 0);
+	ctx2.clearRect(0, 0, width, height);
+	
+	ctx2.translate(-offset, 0);
+	
+	ctx2.translate(width-xCenter, height/2);
+	ctx2.rotate(-rotation);
+	ctx2.translate(-width+xCenter, -height/2);
+	
+	ctx2.scale(-1, 1);
+	ctx2.drawImage(img, (-width-width*size)/2, (height-height*size)/2, imgScaledWidth*size, height*size);
+	
+}
+
+function draw_image1(){	
 
 	ctx.setTransform(1, 0, 0, 1, 0, 0);		
 	ctx.clearRect(0, 0, width, height);	
@@ -63,11 +106,16 @@ function load_image(){
 	$('#image-input').val('');
 	$('#load-button').text('...');
 	
+	set_image(url);
+}
+
+function set_image(url){
+	
 	img.src = url;
 	img.onload = function () {
 		imgWidth = this.width;
 		imgHeight = this.height;
-		widthRatio = imgWidth/width;
+		imgScaledWidth = width * imgWidth / imgHeight;		
 		draw_image();
 		$('#load-button').text('Load');
 	}

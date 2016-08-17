@@ -1,40 +1,36 @@
 
-	body{
-		font-family: lato;
-	}
-	h1{
-		font-size: 40px;
-	}
-	.lead{
-		font-size: 20px;
-	}
 	.menu-container{
 		width: 400px;
-		height: 70px;
+		height: 80px;
 		display: inline-block;
 		vertical-align: top;
 		text-align: left;
-		padding: 10px;
 	}
 	.canvas{
 		display: inline-block;
+		vertical-align: top;
 		margin: 0;
 		padding: 0;
+		max-width: 50%;
+		background-color: #eee;
 	}
 	.slider-div{
-		width: 220px;
+		width: 280px;
 		display: inline-block;
 	}
-	.label{
+	.button-holder{
+		padding: 20px 0 0 20px;
+	}
+	.my-label{
 		display: inline-block;
-		width: 120px;
+		width: 100px;
 		font-size: 18px;
 		text-align: right;
 		padding-right: 20px;
 	}
 	.input{
 		width:160px;
-		padding: 6px;
+		padding: 4px;
 		display:inline-block;
 		border-radius:4px;
 		margin-bottom:10px;
@@ -42,12 +38,32 @@
 		border: 2px solid #ccc;
 		box-sizing: border-box;
 	}
+	.download-container{
+		max-width: 90%; 
+		margin: auto; 
+		width: 800px; 
+		text-align: left;
+		padding-top: 5px;
+	}
+	.image_save_div{
+		display: none;
+		margin: 2px; 
+		padding: 0;
+		border: 1px solid #ccc;
+	}
+	.saved-image{
+		max-width: 190px;
+		max-height: 300px;
+	}
+	.add-button{
+		margin: 2px 0 2px 2px;
+	}
 	.load-button{
 		width: 70px;
 		background-color: #e8e8e8;
 		border: 1px solid #ccc;
 		border-radius: 4px;
-		padding: 7px 14px;
+		padding: 5px 14px;
 		text-align: center;
 		text-decoration: none;
 		display: inline-block;

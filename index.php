@@ -89,7 +89,7 @@
 
 			<div class="col-xs-2" style="padding: 0;">
 				<button class="btn btn-primary btn-xs" onclick="rotate_45()" id="rotate_45_button">45°</button>
-				<input type="text" class="rotation-input" id="rotation_input">
+				<input type="number" class="rotation-input" id="rotation_input">
 			</div>
 
 			<div class="col-xs-3">

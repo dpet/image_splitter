@@ -64,6 +64,10 @@ $('#rotation_input').keyup(function(e){
     }
 });
 
+$('#rotation_input').change(function(){
+	rotation_input($('#rotation_input').val());
+});
+
 function draw_image(){
 	//draws set up to each canvas
 	xCenter = (width-width*size)/2 + imgScaledWidth*size/2;

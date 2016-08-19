@@ -7,6 +7,7 @@ var xCenter = 0;
 var offset = 0;
 var vertical_offset = 0;
 var rotation = 0;
+var rotation_dir = 1;
 var size = 1;
 var crop = 0;
 var flip = false;
@@ -54,6 +55,13 @@ $('#image-upload').change(function(){
 	};
 
 	reader.readAsDataURL(selectedFile);	
+});
+
+$('#rotation_input').keyup(function(e){
+    if(e.keyCode == 13)
+    {
+        rotation_input($('#rotation_input').val());
+    }
 });
 
 function draw_image(){
@@ -126,10 +134,11 @@ function flip_image(){
 	flip = !flip;
 
 	offset *= -1;
-	$("#position_slider").val(offset);
+	$("#position_slider").val(get_offset());
 
 	rotation *= -1;
 	$("#rotation_slider").val(radians_to_degrees(rotation));
+	$('#rotation_input').val(radians_to_degrees(rotation));
 
 	draw_image();
 }
@@ -194,6 +203,7 @@ function set_canvasses(){
 }
 
 function set_large(){
+	// unused. scales final output to a larger image but it shifts the contents of the canvasses
 	width *= 2;
 	height *= 2;
 	c1.width = c2.width = c3.width = c4.width = width;
@@ -225,6 +235,7 @@ function reset(){
 	$("#position_y_slider").val(vertical_offset);
 	rotation = 0;
 	$("#rotation_slider").val(radians_to_degrees(rotation));
+	$('#rotation_input').val(radians_to_degrees(rotation));
 	size = 1;
 	$("#size_slider").val(size*100);
 	crop = 0;
@@ -238,6 +249,10 @@ function set_offset(value){
 	draw_image();
 }
 
+function get_offset(){
+	return offset / (width/100);
+}
+
 function set_y_offset(value){
 	vertical_offset=value*height/100/2;
 	draw_image();
@@ -245,6 +260,43 @@ function set_y_offset(value){
 
 function set_rotation(value){
 	rotation = degrees_to_radians(value);
+	$('#rotation_input').val(value);
+	draw_image();
+}
+
+function rotate_45(){
+	var rotation_degrees = radians_to_degrees(rotation);
+	rotation_degrees += 45 * rotation_dir;
+	rotation_degrees = Math.round(rotation_degrees / 45) * 45;
+
+	if (rotation_degrees > 200){
+		rotation_degrees = 135;
+		rotation_dir = -1;
+	}
+	else if (rotation_degrees < -200){
+		rotation_degrees = -135;
+		rotation_dir = 1;
+	}
+	rotation = degrees_to_radians(rotation_degrees);
+	$("#rotation_slider").val(rotation_degrees);
+	$('#rotation_input').val(rotation_degrees);
+	draw_image();
+
+	console.log(rotation_degrees);
+	console.log(rotation_dir);
+	console.log();
+
+}
+
+function rotation_input(value){
+	if (value > 200)
+		value = 200;
+	if (value < -200)
+		value = -200;
+	$('#rotation_input').val(value);
+
+	rotation = degrees_to_radians(value);
+	$("#rotation_slider").val(value);
 	draw_image();
 }
 

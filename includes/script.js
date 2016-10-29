@@ -285,11 +285,6 @@ function rotate_45(){
 	$("#rotation_slider").val(rotation_degrees);
 	$('#rotation_input').val(rotation_degrees);
 	draw_image();
-
-	console.log(rotation_degrees);
-	console.log(rotation_dir);
-	console.log();
-
 }
 
 function rotation_input(value){

@@ -28,7 +28,12 @@
 
 <div style="text-align: center;">
 	<h1>Image Splitter</h1>
-	<p class="lead">A photo editor for mirroring images<br>Move the sliders to create something new</p>		
+	<p class="lead">
+		A photo editor for mirroring images<br>
+		Move the sliders to create something new<br>
+		<a href="https://www.youtube.com/watch?v=5Xo_eG0Je3c" target="_blank"><span class="video-link-text">See the demo video here</span></a>
+	</p>
+	
 </div><br><br>
 
 <div class="container-fluid">

@@ -1,0 +1,1 @@
+Imge_splitter is hosted online at www.imagesplitter.ca. This reporitory is for learning purposes for anyone interested in how it works.

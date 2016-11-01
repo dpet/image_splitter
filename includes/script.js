@@ -17,6 +17,8 @@ var created_images = 0;
 if(detect_ie())
 	remove_download_buttons();
 
+// 4 canvases are used to mask the mirrored images 
+// and then combined into a single canvas when the image is created
 var c1 = document.getElementById("myCanvas1");
 var ctx1 = c1.getContext("2d");
 var c2 = document.getElementById("myCanvas2");
@@ -32,19 +34,9 @@ var temp_context = temp_canvas.getContext("2d");
 set_canvasses();
 
 var img = new Image();
-img.crossOrigin = "Anonymous";
 set_image("includes/images/tree.jpg");
 
-//load_sliders();
-
-// lets image url input be uploaded by pressing enter
-$('#image-input').keyup(function(e){
-    if(e.keyCode == 13)
-    {
-        load_image();
-    }
-});
-
+// initializes upload button
 $('#image-upload').change(function(){
 	var selectedFile = $('#image-upload')[0].files[0];	
 	var reader = new FileReader();  
@@ -57,9 +49,9 @@ $('#image-upload').change(function(){
 	reader.readAsDataURL(selectedFile);	
 });
 
+// lets the rotation input box work when the user hits enter
 $('#rotation_input').keyup(function(e){
-    if(e.keyCode == 13)
-    {
+    if(e.keyCode == 13){
         rotation_input($('#rotation_input').val());
     }
 });
@@ -68,8 +60,8 @@ $('#rotation_input').change(function(){
 	rotation_input($('#rotation_input').val());
 });
 
+// draws images to each canvas depending on slider values
 function draw_image(){
-	//draws set up to each canvas
 	xCenter = (width-width*size)/2 + imgScaledWidth*size/2;
 
 	draw_context(ctx1, flip, true);
@@ -81,8 +73,8 @@ function draw_image(){
 	draw_crop_borders();
 }
 
+// draws to an individual canvas
 function draw_context(context, left, top){
-	//draws to one canvas
 	context.setTransform(1, 0, 0, 1, 0, 0);		
 	context.clearRect(0, 0, width, height);	
 
@@ -147,17 +139,8 @@ function flip_image(){
 	draw_image();
 }
 
-function load_image(){
-	// adds image to canvasses using url input -removed-
-	url = $('#image-input').val();
-	$('#image-input').val('');
-	$('#load-button').text('...');
-	
-	set_image(url);
-}
-
+// adds a new image to canvasses
 function set_image(url){
-	// adds a new image to canvasses
 	img.src = url;
 	img.onload = function () {
 		set_image_variables();
@@ -165,13 +148,15 @@ function set_image(url){
 		$('#load-button').text('Load');
 	}
 }
+
+// gets width of image when height is the height of the canvas, used to find center.
 function set_image_variables(){
-	// gets width of image when height is the height of the canvas, used to find center.
 	imgWidth = img.width;
 	imgHeight = img.height;
 	imgScaledWidth = height * imgWidth / imgHeight;
 }
 
+// quad is true when set to four images instead of two
 function set_quad(){
 	quad = !quad;
 
@@ -206,29 +191,6 @@ function set_canvasses(){
 	c1.height = c2.height = c3.height = c4.height = height;
 }
 
-function set_large(){
-	// unused. scales final output to a larger image but it shifts the contents of the canvasses
-	width *= 2;
-	height *= 2;
-	c1.width = c2.width = c3.width = c4.width = width;
-	c1.height = c2.height = c3.height = c4.height = height;
-	temp_canvas.width *= 2;
-	temp_canvas.height *= 2;
-	set_image_variables();
-	draw_image();
-}
-
-function undo_large(){
-	width /= 2;
-	height /= 2;
-	c1.width = c2.width = c3.width = c4.width = width;
-	c1.height = c2.height = c3.height = c4.height = height;
-	temp_canvas.width /= 2;
-	temp_canvas.height /= 2;
-	set_image_variables();
-	draw_image();
-}
-
 function reset(){
 	if (flip)
 		flip_image();
@@ -249,16 +211,16 @@ function reset(){
 }
 
 function set_offset(value){
-	offset=value*width/100;
+	offset = value * width / 100;
 	draw_image();
 }
 
 function get_offset(){
-	return offset / (width/100);
+	return offset / (width / 100);
 }
 
 function set_y_offset(value){
-	vertical_offset=value*height/100/2;
+	vertical_offset = value * height / 100 / 2;
 	draw_image();
 }
 
@@ -327,8 +289,8 @@ function download(num){
 	document.body.removeChild(temp_link);
 }
 
+// adds created image to canvasses
 function add_saved_image(num){
-	// adds chosen created image to canvasses
 	if (num === 1)
 		set_image(image_save_1.src);
 	else if (num === 2)
@@ -340,8 +302,8 @@ function add_saved_image(num){
 	reset();
 }
 
+// adds sample image to canvasses
 function add_image(num){
-	// adds chosen sample image to canvasses
 	if (num === 1)
 		set_image("includes/images/tree.jpg");
 	else if (num === 2)
@@ -353,9 +315,8 @@ function add_image(num){
 	reset();
 }
 
+// puts created image in viewer
 function show_image(num){
-	// puts created image in viewer
-
 	if (num === 1)
 		$('#image-viewer').attr('src', image_save_1.src);
 	else if (num === 2)
@@ -372,8 +333,8 @@ function remove_image(){
 	$('#image-viewer-div').css('display', 'none');
 }
 
+// combine canvasses to create final image that can be viewed or downloaded
 function create_image(){
-	// combine canvasses to create final image that can be viewed or downloaded
 	created_images += 1;
 	if (created_images === 5)
 		created_images = 1;
@@ -418,18 +379,21 @@ function create_image(){
 		$('#save_image_1').attr('src', image_save_1.src);
 		$('#save_image_1_div').css('display', 'inline-block');
 	}
+
 	if (created_images === 2){
 		image_save_2 = new Image();
 		image_save_2.src = temp_canvas.toDataURL("image/jpeg", .9);
 		$('#save_image_2').attr('src', image_save_2.src);
 		$('#save_image_2_div').css('display', 'inline-block');
 	}
+
 	if (created_images === 3){
 		image_save_3 = new Image();
 		image_save_3.src = temp_canvas.toDataURL("image/jpeg", .9);
 		$('#save_image_3').attr('src', image_save_3.src);
 		$('#save_image_3_div').css('display', 'inline-block');
 	}
+
 	if (created_images === 4){
 		image_save_4 = new Image();
 		image_save_4.src = temp_canvas.toDataURL("image/jpeg", .9);
@@ -438,6 +402,7 @@ function create_image(){
 	}
 }
 
+// download function doesn't work in IE
 function remove_download_buttons(){
 	$('#download_1').css('display', 'none');
 	$('#download_2').css('display', 'none');
@@ -445,6 +410,7 @@ function remove_download_buttons(){
 	$('#download_4').css('display', 'none');
 }
 
+// detects IE because download function doesn't work in it
 function detect_ie(){
     var ua = window.navigator.userAgent;
     var msie = ua.indexOf("MSIE ");
@@ -455,6 +421,7 @@ function detect_ie(){
 function degrees_to_radians(degrees) {
   return degrees * Math.PI / 180;
 };
+
 function radians_to_degrees(radians) {
   return radians * 180 / Math.PI;
 };

@@ -1,1 +1,7 @@
-Imge_splitter is hosted online at www.imagesplitter.ca. This reporitory is for learning purposes for anyone interested in how it works.
+#Image Splitter
+
+- Image Splitter is hosted online at www.imagesplitter.ca
+- It uses Query and Bootstrap
+- The logic can be found in includes/script.js
+
+This reporitory is for learning purposes for anyone interested in how it works. 

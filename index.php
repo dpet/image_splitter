@@ -24,22 +24,18 @@
 
 <link href='includes/style.css' rel='stylesheet' type='text/css'>
 
-
-
 <div style="text-align: center;">
 	<h1>Image Splitter</h1>
 	<p class="lead">
 		A photo editor for mirroring images<br>
 		Move the sliders to create something new<br>
 		<a href="https://www.youtube.com/watch?v=5Xo_eG0Je3c" target="_blank"><span class="video-link-text">See the demo video here</span></a>
-	</p>
-	
+	</p>	
 </div><br><br>
 
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-5 col-sm-offset-1 col-lg-4">
-
 			<div class="col-xs-9 col-xs-offset-3" style="padding-bottom: 6px;">
 				<div
 				  class="fb-like"
@@ -52,6 +48,7 @@
 			<div class="col-xs-3">				
 				<label class="pull-right">Upload:</label>
 			</div>
+
 			<div class="col-xs-9">
 				<input type="file" id="image-upload">
 			</div><br><br>
@@ -64,19 +61,6 @@
 				<button class="btn btn-primary btn-sm" onclick="reset()">Reset</button>
 				<button class="btn btn-primary btn-sm" onclick="flip_image()">Flip</button>
 				<button class="btn btn-primary btn-sm" onclick="set_quad()" id="quad_button">x4</button>
-
-				<!--
-				<div class="btn-group">
-					<button class="btn btn-primary btn-sm" onclick="rotate_45()" id="rotate_45_button">Rot 45°</button>
-					<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<span class="caret"></span>
-						<span class="sr-only">Toggle Dropdown</span>
-					</button>
-					<div class="dropdown-menu">
-						<div style="display: inline-block; padding: 5px;">Rotation: </div><input type="number" class="rotation-input" id="rotation_input">
-					</div>
-				</div>
-				-->
 			</div>
 		</div>
 
@@ -117,19 +101,17 @@
 	</div>
 </div>
 
-
 <div style="text-align: center; margin-bottom: 6px;">	
 	
-		<!-- can't have line breaks at the end or it puts a space between the canvasses -->
-		<canvas  id="myCanvas1" class="canvas">
-		</canvas><canvas id="myCanvas2" class="canvas">			
-		</canvas><br>
-		<canvas id="myCanvas3" class="canvas">			
-		</canvas><canvas id="myCanvas4" class="canvas">			
-		</canvas>
-	
-	<canvas style="display: none;" id="tempCanvas" class="canvas">
+	<!-- can't have line breaks at the end or it puts a space between the canvasses -->
+	<canvas  id="myCanvas1" class="canvas">
+	</canvas><canvas id="myCanvas2" class="canvas">			
+	</canvas><br>
+	<canvas id="myCanvas3" class="canvas">			
+	</canvas><canvas id="myCanvas4" class="canvas">			
 	</canvas>
+	
+	<canvas style="display: none;" id="tempCanvas" class="canvas"></canvas>
 </div>	
 
 <div class="download-container">
@@ -150,23 +132,7 @@
 			<button class="btn btn-primary btn-sm add-button" onclick="add_saved_image(1)" id="add_image_1">add</button>
 			<button class="btn btn-primary btn-sm" onclick="download(1)" id="download_1">download</button>
 			<button class="btn btn-primary btn-sm" onclick="show_image(1)">view</button>
-			<!--
-			<div class="btn-group">
-			  <button type="button" class="btn btn-primary btn-sm dropdown-toggle add-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			    Share <span class="caret"></span>
-			  </button>
-			  <ul class="dropdown-menu">
-			  	<button class="btn btn-primary btn-sm" onclick="show_image()">facebook</button>
-			    <li><a href="#">Action</a></li>
-			    <li><a href="#">Another action</a></li>
-			    <li><a href="#">Something else here</a></li>
-			    <li role="separator" class="divider"></li>
-			    <li><a href="#">Separated link</a></li>
-			  </ul>
-			</div>
-			-->
 		</div>
-
 	
 	</div><div id="save_image_2_div" class="image_save_div" style="text-align: center;">
 		<img id="save_image_2" class="saved-image"><br>
@@ -189,10 +155,10 @@
 </div>
 
 <div id="image-viewer-div" style="display: none; margin-top: 6px; text-align: center; max-width: 100%;">
-		<img id="image-viewer" style="max-width: 100%;"><br>
-		<div style="width: 800px; margin: auto; text-align: left;">
-			<button onclick="remove_image()" class="btn btn-primary btn-sm add-button">remove</button>
-		</div>
+	<img id="image-viewer" style="max-width: 100%;"><br>
+	<div style="width: 800px; margin: auto; text-align: left;">
+		<button onclick="remove_image()" class="btn btn-primary btn-sm add-button">remove</button>
+	</div>
 </div>
 
 <hr style="margin: 4px auto; width: 800px; max-width: 100%">
@@ -216,10 +182,7 @@
 		<button onclick="add_image(4)" class="btn btn-primary btn-sm add-button">add</button>
 	</div>
 </div>
-
-</div>
-<br><br><br><br><br>
-
+<br><br><br>
 	
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/blitzer/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>

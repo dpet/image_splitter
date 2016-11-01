@@ -1,8 +1,4 @@
-
-<?php
-	$page = 'image_splitter';
-	require_once('header.html');	
-?>
+<?php require_once('header.html'); ?>
 
 <script>
   window.fbAsyncInit = function() {
@@ -189,8 +185,4 @@
 
 <script src="includes/script.js"></script>
 
-<?php
-	require_once('footer.html');	
-?>	
-
-
+<?php require_once('footer.html');	?>	

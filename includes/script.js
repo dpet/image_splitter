@@ -349,28 +349,21 @@ function create_image(){
 		temp_context.fillRect(0, 0, (width-crop) * 2, height);	
 
 	// image 1
-	image = new Image();
-	image.src = c1.toDataURL("image/png");
-
-	temp_context.drawImage(image, -crop, 0, width, height);
+	temp_context.drawImage(c1, -crop, 0, width, height);
 
 	// image 2
-	image.src = c2.toDataURL("image/png");
-
 	temp_context.translate(width-crop, 0);
-	temp_context.drawImage(image, 0, 0, width, height);
+	temp_context.drawImage(c2, 0, 0, width, height);
 
 	if (quad){
 		temp_context.setTransform(1, 0, 0, 1, 0, 0);
 
 		// image 3
-		image.src = c3.toDataURL("image/png");
-		temp_context.drawImage(image, -crop, height, width, height);
+		temp_context.drawImage(c3, -crop, height, width, height);
 
 		// image 4
-		image.src = c4.toDataURL("image/png");
 		temp_context.translate(width-crop, 0);
-		temp_context.drawImage(image, 0, height, width, height);
+		temp_context.drawImage(c4, 0, height, width, height);
 	}
 
 	if (created_images === 1){
